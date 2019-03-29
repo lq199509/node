@@ -7,7 +7,13 @@ const userRouter = require('./routes/userRouter')
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
-//当 http://localhost:9393/api 时 进入到userRouter执行代码
+
+app.use((req, res, next) => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.set('Access-Control-Allow-Headers', 'content-type');
+        next();
+    })
+    //当 http://localhost:9393/api 时 进入到userRouter执行代码
 app.use('/api', userRouter);
 
 app.listen(9393);
